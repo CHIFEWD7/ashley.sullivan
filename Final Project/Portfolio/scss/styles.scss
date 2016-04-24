@@ -1,4 +1,9 @@
 @import 'reset';
+@import 'parsley';
+
+$bp-mobile: "(max-width: 450px)";
+$bp-tablet: "(max-width: 768px)";
+$bp-smdesktop: "(max-width: 1145px)";
 
 /* ====== BRAND ====== */
 $primary-color: #2C3E50;
@@ -9,6 +14,12 @@ $font-stack: 'Raleway', Helvetica, Arial sans-serif;
 /* ====== GLOBAL ====== */
 html {
 	font-size: 16px;
+	@media only screen and #{$bp-tablet} {
+		font-size: 18px;
+	}
+	@media only screen and #{$bp-mobile} {
+		font-size: 22px;
+	}
 }
 * {
 	box-sizing: border-box;
@@ -17,44 +28,67 @@ body {
 	background-color: $secondary-color;
 	font-family: $font-stack;
 }
-.content {
-	width: 50%;
-}
+
 a {text-decoration: none;}
 a:hover {text-decoration: underline;}
 
 /* ====== WIDTH 100% ====== */
 
-header, form, .form-content, input[type=text], textarea, input[type=submit], footer  {
+header, form, .form-content, input[type=text], input[type=email], textarea, input[type=submit], footer  {
 	width: 100%;
+}
+
+/* ====== CONTENT WIDTH 50% ====== */
+
+.about, .contact, .fourOhfour, .footer, .contact-header-content {
+	width: 50%;
+	@media only screen and #{$bp-tablet} {
+		width: 70%;
+	}
 }
 
 /* ====== CENTERING ====== */
 
-.fourOhfour-gif, .contact-h1, .content, form {
+.fourOhfour-gif, .contact-h1, form, .contact-header-content, .about, .contact, .fourOhfour, .footer, .about-header {
 	margin: 0 auto;
+}
+
+/* ====== MARGIN TOP 65px ====== */
+
+.about, .contact, .fourOhfour, .nav-large {
+	margin-top: 65px;
 }
 
 /* ====== LAYOUT ====== */
 header {
 	background-color: $primary-color;
 	color: $secondary-color;
-	height: 200px;
 	font-weight: 300;
+	@media only screen and #{$bp-tablet} {
+		padding-bottom: 1.5em;
+		height: auto;
+	}
+}
+.about-header {
+	height: 200px;
+	width: 70%;
+	@media only screen and #{$bp-smdesktop} {
+		height: 250px;
+	}
 }
 .contact-header {
 	height: auto;
 }
-	header img {
+	.about-header img {
 		width: 160px;
 		height: 160px;
 		border-radius: 50%;
 		margin: 25px 20px 0 0;
 		float: left;
+		@media only screen and #{$bp-tablet} {
+			display: none;
+		}
 	}
-.mT65 {
-	margin-top: 65px;
-}
 	
 
 /* ====== TYPOGRAPHY ====== */
@@ -64,6 +98,11 @@ header {
 	margin: 60px 0 0 0;
 	display: inline-block;
 	color: $secondary-color;
+	@media only screen and #{$bp-tablet} {
+		width: 100%;
+		text-align: center;
+		margin-top: .5em;
+	}
 }
 	.contact-h2 a {
 		color: $secondary-color;
@@ -78,15 +117,20 @@ header {
 }
 .subhead {
 	font-size: 1.625rem;
+	@media only screen and #{$bp-tablet} {
+		margin-top: .5em;
+		width: 100%;
+		text-align: center;
+		display: block;
+	}
 }
 p {
 	font-size: 1.125rem;
-	line-height: 1.2;
+	line-height: 1.4;
 	font-weight: 400;
 	margin-bottom: 20px;
 }
 .contact p {
-	width: 60%;
 	margin: 1em auto;
 	line-height: 1.2;
 }
@@ -102,20 +146,24 @@ a {
 }
 
 /* ====== CONTACT ====== */
-input[type=text], textarea, input[type=submit]  {
+input[type=text], textarea, input[type=submit], input[type=email]  {
 	font-size: 1rem;
 }
-input[type=text] {
+input[type=text], input[type=email], {
 	padding: 16px;
 	margin-bottom: 16px;
 	font-family: $font-stack; 
-	margin: 0.5em 0 1.5em 0;
+	margin: 0.5em 0 0 0;
+}
+label {
+	margin: 1.5em 0 0 0;
+	display: block;
 }
 textarea {
 	font-family: $font-stack;
 	display: block;
 	height: 125px;
-	margin: 0.5em 0 1.5em 0;
+	margin: 0.5em 0 0 0;
 	padding: 1em;
 	border: none;
 }
@@ -126,6 +174,7 @@ input[type=submit] {
 	font-family: $font-stack;
 	border-radius: 3px;
 	padding: 1em 0;
+	margin-top: 1.5em;
 }
 
 /* ====== 404 ====== */
@@ -141,6 +190,13 @@ footer {
 	height: 150px;
 	padding-top: 50px;
 }
+.footer p {
+	display: inline-block;
+	@media only screen and #{$bp-mobile} {
+		width: 100%;
+		text-align: center;
+		}
+}
 /* ====== NAV ====== */
 .nav-large {
 	text-align: center;
@@ -154,6 +210,7 @@ footer {
 	}
 	/* HOVERS FOR ICONS */
 	.fa-envelope:hover {color: #C27E47;}
+	.fa-file:hover {color: #F3852D;}
 	.fa-twitter:hover {color: #1DA1F2;}
 	.fa-linkedin:hover {color: #2469A3;}
 	.fa-github-alt:hover {color: #582D7B;}
@@ -163,6 +220,12 @@ footer {
 .nav-small {
 	display: inline-block;
 	float: right;
+	@media only screen and #{$bp-mobile} {
+		width: 100%;
+		display: block;
+		text-align: center;
+		margin-top: 1em;
+	}
 }
 header .nav-small a {
 	color: $secondary-color;
@@ -171,57 +234,10 @@ header .nav-small a {
 	header .nav-small {
 		margin-top: 30px;
 	}
+	footer .nav-small {
+		margin-top: 0;
+	}
 footer .nav-small a {
 	color: $primary-color;
 	margin-left: 10px;
-}
-
-/* ====== RESPONSIVE ====== */
-@media screen and (max-width: 1200px){
-	.content {
-		width: 70%;
-	}
-	h1 {
-		margin-top: 50px;
-	}
-}
-@media screen and (max-width: 768px){
-	.content {
-		width: 70%;
-	}
-	.about {
-		padding: 0 2% 0 0;
-	}
-	header {
-		height: auto;
-		padding-bottom: 1.5em;
-	}
-	header img {
-		float: none;
-		display: block;
-		margin: 0 auto;
-	}
-	h1 {
-		width: 100%;
-		text-align: center;
-		margin-top: .5em;
-	}
-	.subhead {
-		margin-top: .5em;
-		width: 100%;
-		text-align: center;
-		display: block;
-	}
-}
-@media screen and (max-width: 450px){
-	footer p {
-		width: 100%;
-		text-align: center;
-	}
-	.nav-small {
-		width: 100%;
-		display: block;
-		text-align: center;
-		margin-top: 1em;
-	}
 }
